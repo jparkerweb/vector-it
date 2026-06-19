@@ -1,0 +1,27 @@
+[package]
+name = "vectorit-core"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+image = { workspace = true }
+palette = { workspace = true }
+thiserror = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+vtracer = "0.6"
+visioncortex = "0.8"
+pdf-writer = "0.11"
+dxf = "0.5"
+tracing = { workspace = true }
+resvg = "0.44"
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+insta = "1"
+proptest = "1"
+quick-xml = "0.37"
+
+[[bench]]
+name = "pipeline_bench"
+harness = false

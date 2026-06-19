@@ -1,0 +1,11 @@
+---
+source: vectorit-core/tests/golden_svg.rs
+expression: svg_str
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 64 64" width="64" height="64">
+  <path d="M0.000,0.000 L64.000,0.000 L64.000,64.000 L0.000,64.000 L0.000,0.000Z" fill="#00ff00" stroke="#00ff00" stroke-width="0.09375"/>
+  <path d="M32.000,32.000 L64.000,32.000 L64.000,64.000 L32.000,64.000 L32.000,32.000Z" fill="#ffff00" stroke="#ffff00" stroke-width="0.09375"/>
+  <path d="M0.000,32.000 L32.000,32.000 L32.000,64.000 L0.000,64.000 L0.000,32.000Z" fill="#0000ff" stroke="#0000ff" stroke-width="0.09375"/>
+  <path d="M0.000,0.000 L32.000,0.000 L32.000,32.000 L0.000,32.000 L0.000,0.000Z" fill="#ff0000" stroke="#ff0000" stroke-width="0.09375"/>
+</svg>

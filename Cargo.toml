@@ -1,0 +1,13 @@
+[workspace]
+members = ["vectorit-core", "vectorit-app/src-tauri"]
+resolver = "2"
+
+[workspace.dependencies]
+image = "0.25"
+palette = "0.7"
+thiserror = "2"
+anyhow = "1"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

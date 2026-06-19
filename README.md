@@ -1,50 +1,57 @@
 # VectorIt
 
-**Open-source desktop application that converts raster images into high-quality vector graphics.**
+<div align="center">
 
-VectorIt converts PNG, JPG, BMP, GIF, and TIFF images into clean SVG, EPS, PDF, and DXF vector output. Built with Rust for performance and Tauri v2 for a lightweight desktop shell (~5 MB), with a React + TypeScript frontend.
+<img src="https://github.com/jparkerweb/vector-it/blob/main/banner.jpg?raw=true" alt="banner" style="max-height:300px;">
 
----
+### ⚡ *Pixels in. Vectors out. No questions asked.* ⚡
 
-## Table of Contents
+**Open-source desktop app that converts raster images into vector graphics.**
 
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Prerequisites (First-Time Setup)](#prerequisites-first-time-setup)
-- [Building & Running](#building--running)
-- [Troubleshooting](#troubleshooting)
-- [Usage](#usage)
-- [Running Tests](#running-tests)
-- [Tech Stack](#tech-stack)
-- [Architecture](#architecture)
-- [Contributing](#contributing)
-- [License](#license)
+VectorIt converts PNG, JPG, BMP, GIF, and TIFF images into clean SVG, EPS, PDF, and DXF vector output.  
+Built with **Rust** for blazing speed and **Tauri v2** for a featherweight desktop shell (~5 MB),  
+wrapped in a **React + TypeScript** frontend.
 
----
+`────────────────────────── ◈ ──────────────────────────`
 
-## Features
+[![License](https://img.shields.io/badge/license-Apache--2.0-ff00ff?style=flat-square&logo=apache)](LICENSE)
+[![Built With](https://img.shields.io/badge/built_with-Rust_🦀-e44d26?style=flat-square&logo=rust&logoColor=white)](#-tech-stack)
+[![Desktop](https://img.shields.io/badge/desktop-Tauri_v2-00e5ff?style=flat-square&logo=tauri&logoColor=white)](#-tech-stack)
+[![Frontend](https://img.shields.io/badge/frontend-React_⚛️-61dafb?style=flat-square&logo=react&logoColor=black)](#-tech-stack)
 
-- **Multi-format input:** PNG, JPG, BMP, GIF, TIFF
-- **Multi-format output:** SVG, EPS, PDF, DXF (Spline & Line-only)
-- **Bitmap export:** Re-rasterize vectors at any resolution (PNG, BMP, JPEG)
-- **Quality presets:** Logo, Illustration, Photo, Pixel Art, Minimal, Detailed
-- **Fine-tune controls:** Colors, smoothness, corner threshold, speckle filter, path mode
-- **Clipboard paste:** Ctrl+V to paste and vectorize directly
-- **Quick Save:** Ctrl+S for instant re-export with last settings
-- **Drag-and-drop:** Drag exported files to other applications
-- **Segmentation editor:** Manually adjust color regions before vectorization
-- **Auto-resize:** Handles large images (20MP+) by auto-downsampling for analysis
-- **Fully offline:** No internet required
+</div>
 
----
+`═══════════════════════════════════════════════════════════════`
 
-## Project Structure
+## 🌟 Features
+
+> *Maximum power. Minimum friction.*
+
+| | Feature | Description |
+|---|---------|-------------|
+| 🎨 | **Multi-format input** | PNG, JPG, BMP, GIF, TIFF |
+| 📐 | **Multi-format output** | SVG, EPS, PDF, DXF (Spline & Line-only) |
+| 🖼️ | **Bitmap export** | Re-rasterize vectors at any resolution (PNG, BMP, JPEG) |
+| ⚙️ | **Quality presets** | Logo, Illustration, Photo, Pixel Art, Minimal, Detailed |
+| 🎛️ | **Fine-tune controls** | Colors, smoothness, corner threshold, speckle filter, path mode |
+| 📋 | **Clipboard paste** | `Ctrl+V` to paste and vectorize directly |
+| 💾 | **Quick Save** | `Ctrl+S` for instant re-export with last settings |
+| 🖱️ | **Drag-and-drop** | Drag exported files to other applications |
+| ✏️ | **Segmentation editor** | Manually adjust color regions before vectorization |
+| 📏 | **Auto-resize** | Handles large images (20MP+) by auto-downsampling for analysis |
+| 🔒 | **Fully offline** | No internet required — your pixels stay yours |
+
+`═══════════════════════════════════════════════════════════════`
+
+## 📂 Project Structure
+
+> *Two crates. One mission.*
 
 ```
 vector-it/
 ├── Cargo.toml                  # Rust workspace root (defines both crates)
 ├── Cargo.lock                  # Locked dependency versions
-├── vectorit-core/              # Pure Rust library — vectorization engine
+├── vectorit-core/              # ⚡ Pure Rust library — vectorization engine
 │   ├── Cargo.toml
 │   ├── src/
 │   │   ├── lib.rs              # Library entry point
@@ -68,7 +75,7 @@ vector-it/
 │   ├── tests/                  # Integration & property tests
 │   └── benches/                # Criterion performance benchmarks
 │
-├── vectorit-app/               # Tauri desktop application
+├── vectorit-app/               # 🖥️ Tauri desktop application
 │   ├── package.json            # Node.js / npm config (frontend deps)
 │   ├── vite.config.ts          # Vite bundler config
 │   ├── tsconfig.json           # TypeScript config
@@ -94,15 +101,17 @@ vector-it/
 └── .github/workflows/          # CI/CD (GitHub Actions)
 ```
 
-**Key concept:** This is a Rust *workspace* with two crates:
-- `vectorit-core` — the engine (pure library, no UI)
-- `vectorit-app/src-tauri` — the desktop shell (depends on `vectorit-core`)
+> 🔑 **Key concept:** This is a Rust *workspace* with two crates:
+> - `vectorit-core` — the engine (pure library, no UI)
+> - `vectorit-app/src-tauri` — the desktop shell (depends on `vectorit-core`)
 
----
+`═══════════════════════════════════════════════════════════════`
 
-## Prerequisites (First-Time Setup)
+## 🔌 Prerequisites (First-Time Setup)
 
-### 1. Install Rust
+> *Jack in before you ride the grid.*
+
+### `01` 🦀 Install Rust
 
 Go to <https://rustup.rs/> and run the installer. On Windows this downloads `rustup-init.exe`.
 
@@ -117,7 +126,7 @@ rustc --version    # Should show 1.78+ (e.g., rustc 1.82.0)
 cargo --version    # Should show cargo 1.78+
 ```
 
-### 2. Install Node.js
+### `02` 🟢 Install Node.js
 
 Go to <https://nodejs.org/> and install the **LTS** version (v20+).
 
@@ -127,7 +136,7 @@ node --version     # Should show v20.x or v22.x
 npm --version      # Should show 10.x+
 ```
 
-### 3. Install Tauri CLI
+### `03` 📦 Install Tauri CLI
 
 ```powershell
 cargo install tauri-cli
@@ -138,16 +147,16 @@ This compiles from source and takes 2–5 minutes the first time. After it finis
 cargo tauri --version   # Should show tauri-cli 2.x
 ```
 
-### 4. (Windows) WebView2 Runtime
+### `04` 🪟 (Windows) WebView2 Runtime
 
-Tauri uses WebView2 (built into Windows 10/11). If you're on Windows 10 and it's not installed:
+Tauri uses WebView2 (built into Windows 10/11). If you're on Windows 10 and it's not installed:  
 <https://developer.microsoft.com/en-us/microsoft-edge/webview2/>
 
----
+`═══════════════════════════════════════════════════════════════`
 
-## Building & Running
+## 🚀 Building & Running
 
-### Development Mode (hot-reload)
+### ⚡ Development Mode (hot-reload)
 
 ```powershell
 cd vectorit-app
@@ -160,9 +169,9 @@ cargo tauri dev          # Starts dev server + compiles Rust + opens window
 2. Cargo compiles the Rust backend (first build takes 2–5 min, subsequent builds are fast)
 3. A desktop window opens showing the app
 
-**First build is slow** — Rust compiles ~200+ dependency crates. After that, incremental builds are 5–15 seconds.
+> ⏳ **First build is slow** — Rust compiles ~200+ dependency crates. After that, incremental builds are 5–15 seconds.
 
-### Production Build (installer)
+### 📦 Production Build (installer)
 
 ```powershell
 cd vectorit-app
@@ -175,34 +184,43 @@ Produces a Windows installer at:
 vectorit-app/src-tauri/target/release/bundle/nsis/VectorIt_1.0.0_x64-setup.exe
 ```
 
-### Running just the core library tests (no UI)
+### 🧪 Running just the core library tests (no UI)
 
 ```powershell
 cd vectorit-core
 cargo test
 ```
 
----
+`═══════════════════════════════════════════════════════════════`
 
-## Troubleshooting
+## 🔧 Troubleshooting
 
-### "Couldn't recognize the current folder as a Tauri project"
+> *When the neon flickers…*
 
-You must run `cargo tauri dev` from the `vectorit-app/` directory (where `package.json` lives), NOT from the workspace root.
+<details>
+<summary>💥 <b>"Couldn't recognize the current folder as a Tauri project"</b></summary>
 
-### Stale build cache errors (paths to old directories)
+You must run `cargo tauri dev` from the `vectorit-app/` directory (where `package.json` lives), **NOT** from the workspace root.
+</details>
+
+<details>
+<summary>💥 <b>Stale build cache errors (paths to old directories)</b></summary>
 
 ```powershell
 cargo clean
 cargo tauri dev
 ```
+</details>
 
-### "linker `link.exe` not found"
+<details>
+<summary>💥 <b>"linker `link.exe` not found"</b></summary>
 
-You need Visual Studio Build Tools with C++ workload. Install from:
+You need Visual Studio Build Tools with C++ workload. Install from:  
 <https://visualstudio.microsoft.com/visual-cpp-build-tools/>
+</details>
 
-### npm install fails
+<details>
+<summary>💥 <b>npm install fails</b></summary>
 
 Make sure you're in `vectorit-app/` (not the root). Delete `node_modules` and retry:
 ```powershell
@@ -210,34 +228,44 @@ cd vectorit-app
 Remove-Item -Recurse node_modules
 npm install
 ```
+</details>
 
-### Vite port already in use
+<details>
+<summary>💥 <b>Vite port already in use</b></summary>
 
 Another process is using port 1420. Kill it or change the port in `vite.config.ts`.
+</details>
 
----
+`═══════════════════════════════════════════════════════════════`
 
-## Usage
+## 🕹️ Usage
 
-### Quick Start (3 clicks)
+### ⚡ Quick Start — 3 clicks to vector glory
+
+```
+ ┌─────────┐      ┌─────────┐      ┌─────────┐
+ │  OPEN   │ ───▶ │  AUTO   │ ───▶ │ EXPORT  │
+ │ 🖼️ Load │      │ ⚙️ Trace │      │ 💾 Save │
+ └─────────┘      └─────────┘      └─────────┘
+```
 
 1. **Open** — Click "Open" or drag an image onto the window
 2. **Auto** — VectorIt auto-vectorizes with the selected preset
 3. **Export** — Click "Export" to save as SVG/EPS/PDF/DXF
 
-### Keyboard Shortcuts
+### ⌨️ Keyboard Shortcuts
 
 | Shortcut | Action |
-|----------|--------|
-| Ctrl+V | Paste image from clipboard |
-| Ctrl+S | Quick Save (re-export with last settings) |
-| Ctrl+Z | Undo (in canvas/segmentation editor) |
-| Ctrl+Shift+Z | Redo (in canvas editor) |
+|:---------|:-------|
+| `Ctrl+V` | Paste image from clipboard |
+| `Ctrl+S` | Quick Save (re-export with last settings) |
+| `Ctrl+Z` | Undo (in canvas/segmentation editor) |
+| `Ctrl+Shift+Z` | Redo (in canvas editor) |
 
-### Sidebar Controls
+### 🎛️ Sidebar Controls
 
 | Control | What it does |
-|---------|-------------|
+|:--------|:------------|
 | **Preset** | One-click configurations (Logo, Photo, Pixel Art, etc.) |
 | **Quality** | Low (fast) / Medium / High (best fidelity) |
 | **Colors** | How many colors to quantize to (2–32) |
@@ -247,73 +275,94 @@ Another process is using port 1420. Kill it or change the port in `vite.config.t
 | **Corner Threshold** | Angle to treat as a sharp corner vs smooth curve |
 | **Auto-Render** | Re-process automatically when you change settings |
 
----
+`═══════════════════════════════════════════════════════════════`
 
-## Running Tests
+## 🧪 Running Tests
 
 ```powershell
-# All tests (from workspace root)
+# ⚡ All tests (from workspace root)
 cargo test --workspace
 
-# Just the core engine tests
+# 🦀 Just the core engine tests
 cd vectorit-core
 cargo test
 
-# Integration tests only (format validation)
+# 🔬 Integration tests only (format validation)
 cargo test --test format_tests
 
-# Performance benchmarks
+# 📊 Performance benchmarks
 cargo bench
 
-# Frontend type-check
+# ✅ Frontend type-check
 cd vectorit-app
 npm run build
 ```
 
----
+`═══════════════════════════════════════════════════════════════`
 
-## Tech Stack
+## 💾 Tech Stack
 
-| Layer | Technology | Why |
-|-------|-----------|-----|
-| Core Engine | **Rust** | Fast, memory-safe, compiles to native code |
-| Desktop Shell | **Tauri v2** | Lightweight (~5 MB), uses OS webview, Rust backend |
-| Frontend | **React 18 + TypeScript** | Component model, type safety |
-| Styling | **Tailwind CSS v4** | Utility-first, fast iteration |
-| State | **Zustand** | Lightweight React state management |
-| Bundler | **Vite** | Fast HMR (hot module reload) for development |
-| Vectorization | **vtracer** crate | Battle-tested image tracing engine |
-| Color Science | **palette** crate | CIE Lab color space conversions |
-| PDF Output | **pdf-writer** crate | Low-level PDF generation |
-| DXF Output | **dxf** crate | AutoCAD DXF file format |
-| Testing | **criterion** | Statistical benchmarking for Rust |
+> *The machines under the hood.*
 
----
+| | Layer | Technology | Why |
+|---|-------|-----------|-----|
+| 🦀 | Core Engine | **Rust** | Fast, memory-safe, compiles to native code |
+| 🖥️ | Desktop Shell | **Tauri v2** | Lightweight (~5 MB), uses OS webview, Rust backend |
+| ⚛️ | Frontend | **React 18 + TypeScript** | Component model, type safety |
+| 🎨 | Styling | **Tailwind CSS v4** | Utility-first, fast iteration |
+| 🧠 | State | **Zustand** | Lightweight React state management |
+| ⚡ | Bundler | **Vite** | Fast HMR (hot module reload) for development |
+| 🔍 | Vectorization | **vtracer** crate | Battle-tested image tracing engine |
+| 🧬 | Color Science | **palette** crate | CIE Lab color space conversions |
+| 📄 | PDF Output | **pdf-writer** crate | Low-level PDF generation |
+| 📐 | DXF Output | **dxf** crate | AutoCAD DXF file format |
+| 📊 | Testing | **criterion** | Statistical benchmarking for Rust |
 
-## Architecture
+`═══════════════════════════════════════════════════════════════`
+
+## 🏗️ Architecture
+
+> *The signal path.*
 
 ```
-Image → Resize → Quantize → Segment → [Editor] → Trace (vtracer) → Export
+  ┌───────┐   ┌────────┐   ┌──────────┐   ┌─────────┐   ┌────────┐   ┌─────────┐   ┌────────┐
+  │ IMAGE │──▶│ RESIZE │──▶│ QUANTIZE │──▶│ SEGMENT │──▶│ EDITOR │──▶│  TRACE  │──▶│ EXPORT │
+  └───────┘   └────────┘   └──────────┘   └─────────┘   └────────┘   └─────────┘   └────────┘
+     📷          📏            🎨             🧩           ✏️            ✒️            💾
 ```
 
-- **Resize**: Auto-downsample images > 4MP for analysis speed
-- **Quantize**: K-means++ clustering in CIE Lab color space → fixed palette
-- **Segment**: Flood-fill connected components → regions
-- **Editor**: Optional manual region corrections (paint/split/merge)
-- **Trace**: vtracer converts pixel data → Bézier paths; custom modules (tracer, simplifier, corner, fitter, optimizer) provide additional boundary tracing and path refinement
-- **Export**: Serialize to SVG/EPS/PDF/DXF/Bitmap
+| Stage | What it does |
+|:------|:-------------|
+| **Resize** | Auto-downsample images > 4MP for analysis speed |
+| **Quantize** | K-means++ clustering in CIE Lab color space → fixed palette |
+| **Segment** | Flood-fill connected components → regions |
+| **Editor** | Optional manual region corrections (paint/split/merge) |
+| **Trace** | vtracer converts pixel data → Bézier paths; custom modules (tracer, simplifier, corner, fitter, optimizer) provide additional boundary tracing and path refinement |
+| **Export** | Serialize to SVG / EPS / PDF / DXF / Bitmap |
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for full details including IPC protocol and module dependency graph.
 
----
+`═══════════════════════════════════════════════════════════════`
 
-## Contributing
+## 🤝 Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, code style, and PR guidelines.
 
----
+`═══════════════════════════════════════════════════════════════`
 
-## License
+## 📜 License
 
 Licensed under [Apache-2.0](LICENSE).
+
+<div align="center">
+
+```
+╔══════════════════════════════════════════════════════════════╗
+║          P I X E L S   I N  ·  V E C T O R S   O U T       ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
+*Made with 🦀 Rust, ⚡ Tauri, and mass quantities of mass quantities of mass quantities of neon.*
+
+</div>
 

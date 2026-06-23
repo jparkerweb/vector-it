@@ -33,6 +33,7 @@ pub fn run() {
             commands::paste_from_clipboard,
             commands::start_drag,
             commands::export_bitmap,
+            commands::flatten_svg,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

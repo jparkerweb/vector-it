@@ -14,3 +14,4 @@ pub mod aa_detector;
 pub mod subpixel;
 pub mod editor;
 pub mod resizer;
+pub mod flatten;

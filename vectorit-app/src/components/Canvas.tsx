@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState, useCallback, useMemo } from "react";
-import { useAppStore, VectorPath, BezierSegment, Point, RgbColor } from "../stores/appStore";
+import { invoke } from "@tauri-apps/api/core";
+import { useAppStore, VectorPath, VectorizationResult, BezierSegment, Point, RgbColor } from "../stores/appStore";
 import { InlineColorPicker } from "./InlineColorPicker";
 import { ShapePicker } from "./ShapePicker";
 import {
@@ -1703,6 +1704,32 @@ export function Canvas({ antiAlias = true, bgColor = null }: { antiAlias?: boole
     setHoveredPath(null);
   }, [selectedPaths, vectorResult, pushUndo]);
 
+  // Flatten: rasterize & re-vectorize to remove hidden geometry
+  const [isFlattening, setIsFlattening] = useState(false);
+  const flattenSvg = useCallback(async () => {
+    if (!vectorResult || isFlattening) return;
+    pushUndo();
+    setIsFlattening(true);
+    try {
+      // Count unique colors to use as color_count hint
+      const uniqueColors = new Set(
+        vectorResult.paths.map((p) => `${p.fill_color.r},${p.fill_color.g},${p.fill_color.b}`)
+      );
+      const colorCount = Math.max(2, Math.min(32, uniqueColors.size));
+      const flattened = await invoke<VectorizationResult>("flatten_svg", {
+        result: vectorResult,
+        colorCount,
+      });
+      useAppStore.setState({ vectorResult: flattened });
+      setSelectedPaths(new Set());
+      setHoveredPath(null);
+    } catch (e) {
+      console.error("Flatten failed:", e);
+    } finally {
+      setIsFlattening(false);
+    }
+  }, [vectorResult, isFlattening, pushUndo]);
+
   const undo = useCallback(() => {
     if (undoStackRef.current.length === 0 || !vectorResult) return;
     redoStackRef.current.push([...vectorResult.paths]);
@@ -1887,6 +1914,12 @@ export function Canvas({ antiAlias = true, bgColor = null }: { antiAlias?: boole
             className="px-2 py-1 text-xs text-gray-600 hover:bg-gray-100 disabled:opacity-30 disabled:cursor-default rounded-md transition-colors"
             title="Redo (Ctrl+Shift+Z)"
           >↪</button>
+          <div className="h-4 w-px bg-gray-300 mx-0.5" />
+          <button
+            onClick={flattenSvg} disabled={isFlattening || !vectorResult}
+            className="px-2 py-1 text-xs text-gray-600 hover:bg-gray-100 disabled:opacity-30 disabled:cursor-default rounded-md transition-colors"
+            title="Flatten — rasterize & re-vectorize to remove hidden geometry and simplify paths"
+          >{isFlattening ? "⏳" : "🫓"} Flatten</button>
         </div>
 
         {/* Tool options */}

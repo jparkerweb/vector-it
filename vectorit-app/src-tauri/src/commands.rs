@@ -751,3 +751,19 @@ pub fn export_bitmap(
     std::fs::write(&path, &data).map_err(|e| e.to_string())?;
     Ok(path)
 }
+
+/// Flatten the SVG: rasterize visible paths and re-vectorize with aggressive simplification.
+/// This removes all occluded geometry and drastically reduces path count/complexity.
+#[tauri::command]
+pub fn flatten_svg(
+    result: VectorizationResult,
+    color_count: u16,
+    app_handle: tauri::AppHandle,
+) -> std::result::Result<VectorizationResult, String> {
+    let progress_callback = move |progress: PipelineProgress| {
+        let _ = app_handle.emit("progress", &progress);
+    };
+
+    vectorit_core::flatten::flatten(&result, color_count, Some(&progress_callback))
+        .map_err(|e| e.to_string())
+}
